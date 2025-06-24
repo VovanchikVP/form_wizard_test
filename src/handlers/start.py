@@ -13,8 +13,6 @@ start_router = Router()
 
 @start_router.message(CommandStart())
 async def cmd_start(message: Message):
-    t2 = 11111
-    t1 = 22222
     await message.answer("Никита молодец.")
 
 
