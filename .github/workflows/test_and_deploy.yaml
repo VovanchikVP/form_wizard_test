@@ -54,7 +54,7 @@ jobs:
             git checkout master
             git pull
             docker build . -t=form_wizard -f=docker/Dockerfile
-            docker stop form_wizard
-            docker rm form_wizard
-            docker run -d --env-file=.env --name form_wizard form_wizard
+            docker stop form_wizard_test
+            docker rm form_wizard_test
+            docker run -d --env-file=.env --name form_wizard_test form_wizard_test
             docker system prune --all --force
