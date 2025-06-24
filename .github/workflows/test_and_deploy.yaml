@@ -53,7 +53,7 @@ jobs:
             echo APP_TIMEOUT=${{ vars.APP_TIMEOUT }} >> .env
             git checkout master
             git pull
-            docker build . -t=form_wizard -f=docker/Dockerfile
+            docker build . -t=form_wizard_test -f=docker/Dockerfile
             docker stop form_wizard_test
             docker rm form_wizard_test
             docker run -d --env-file=.env --name form_wizard_test form_wizard_test
