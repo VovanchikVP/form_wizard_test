@@ -19,7 +19,6 @@ class ThreadedEventLoop(threading.Thread):
 
 
 async def main():
-    print("Test lint")
     dp.include_router(start_router)
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
