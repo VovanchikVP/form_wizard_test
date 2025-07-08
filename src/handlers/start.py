@@ -11,6 +11,7 @@ from aiogram.types import Message
 
 from src.sevices.audio_converter.voice_to_text import VoiceToTextService
 from src.sevices.llm_giga.giga import GIGAChatService
+from src.sevices.templates.initial_template_preparation import InitialTemplatePreparation
 
 start_router = Router()
 
@@ -35,6 +36,13 @@ async def get_audio_messages(message: Message):
     """Обработка голосовых сообщений"""
     message_text = await VoiceToTextService.parce_voice_message(message)
     await message.answer(message_text)
+
+
+@start_router.message(F.document)
+async def get_docx_messages(message: Message):
+    if message.content_type == types.ContentType.DOCUMENT:
+        message_text = await InitialTemplatePreparation.parce_document(message)
+        await message.answer(message_text)
 
 
 @start_router.message()
