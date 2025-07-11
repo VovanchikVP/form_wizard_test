@@ -59,7 +59,7 @@ class GetTemplates:
     ) -> str | list[dict[str, str]]:
         """Получение всех переменных необходимых для формирования документа"""
         res = cursor.execute(
-            "SELECT description, code FROM arguments WHERE template_rowid = ? ORDER BY description", (template_rowid,)
+            "SELECT description, code FROM arguments WHERE templates_rowid = ? ORDER BY description", (template_rowid,)
         ).fetchall()
         if as_list:
             return [{"description": i[0], "code": i[1]} for i in res]

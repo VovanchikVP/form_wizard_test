@@ -35,7 +35,8 @@ async def cmd_start_3(message: Message):
 async def get_audio_messages(message: Message):
     """Обработка голосовых сообщений"""
     message_text = await VoiceToTextService.parce_voice_message(message)
-    await message.answer(message_text)
+    answer_llm = await GIGAChatService.request_function(message_text, message.from_user.id)
+    await message.answer(answer_llm)
 
 
 @start_router.message(F.document)
@@ -49,5 +50,5 @@ async def get_docx_messages(message: Message):
 async def get_all_messages(message: Message):
     """Обработка всех непонятных текстовых сообщений"""
     if message.content_type == types.ContentType.TEXT:
-        answer_llm = await GIGAChatService.request(message.text)
+        answer_llm = await GIGAChatService.request_function(message.text, message.from_user.id)
         await message.answer(answer_llm)
